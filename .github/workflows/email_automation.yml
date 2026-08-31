@@ -1,0 +1,29 @@
+name: Email Lead Generation
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"   # every Monday, 9:00 AM UTC (2:00 PM PKT, UTC+5)
+  workflow_dispatch: {}    # manual trigger from GitHub Actions UI for testing
+
+jobs:
+  run-automation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run email automation script
+        env:
+          APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          GOOGLE_CREDS_JSON: ${{ secrets.GOOGLE_CREDS_JSON }}
+        run: python email_automation.py

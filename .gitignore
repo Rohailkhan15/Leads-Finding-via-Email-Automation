@@ -1,0 +1,5 @@
+*.json
+.env
+__pycache__/
+appolo_exports
+
