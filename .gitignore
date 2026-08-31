@@ -1,6 +1,5 @@
 *.json
 .env
 __pycache__/
-appolo_exports
-
-
+apollo_exports/*.csv
+apollo_exports/processed/
